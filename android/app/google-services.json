@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "817624446796",
+    "firebase_url": "https://atmfinder-1d037.firebaseio.com",
+    "project_id": "atmfinder-1d037",
+    "storage_bucket": "atmfinder-1d037.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:817624446796:android:51812414849a8cde1201e9",
+        "android_client_info": {
+          "package_name": "com.qa.flutteramap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "817624446796-g32rgvs7gf8d3ed2suqu09kejd4he6d9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdWeTMYqrquS06mvIWlo_pODSWdWPtw4Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "817624446796-g32rgvs7gf8d3ed2suqu09kejd4he6d9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,391 @@
+@startuml
+set namespaceSeparator ::
+
+class "flutteramap::controller::appbar_controller.dart::HomeBarControl" {
+  +dynamic enableFilter
+  +dynamic textSearching
+  {static} +HomeBarControl to
+  +void initialState()
+  +void enableFilterWidget()
+  +void enableCategoryWidget()
+  +void changeTextSearch()
+}
+
+"flutteramap::controller::appbar_controller.dart::HomeBarControl" o-- "flutteramap::controller::appbar_controller.dart::HomeBarControl"
+"get::src::rx::rx_interface.dart::RxController" <|-- "flutteramap::controller::appbar_controller.dart::HomeBarControl"
+
+class "flutteramap::controller::bottomsheet_controller.dart::BottomSheetControl" {
+  +dynamic onMin
+  +dynamic isShow
+  +ScrollController scrollController
+  {static} +BottomSheetControl to
+  +void onMinState()
+  +void onOpenState()
+  +void showSheet()
+}
+
+"flutteramap::controller::bottomsheet_controller.dart::BottomSheetControl" o-- "flutter::src::widgets::scroll_controller.dart::ScrollController"
+"flutteramap::controller::bottomsheet_controller.dart::BottomSheetControl" o-- "flutteramap::controller::bottomsheet_controller.dart::BottomSheetControl"
+"get::src::rx::rx_interface.dart::RxController" <|-- "flutteramap::controller::bottomsheet_controller.dart::BottomSheetControl"
+
+class "flutteramap::controller::filter_controller.dart::FilterControl" {
+  +dynamic isShowRange
+  +dynamic radiusValue
+  +dynamic bankName
+  +dynamic defaultItemIndex
+  +dynamic banks
+  {static} +FilterControl to
+  +void bankSelected()
+  +void radiusSelected()
+  +void showRangeSelected()
+  +void onCancle()
+  +void onUpdate()
+}
+
+"flutteramap::controller::filter_controller.dart::FilterControl" o-- "flutteramap::controller::filter_controller.dart::FilterControl"
+"get::src::rx::rx_interface.dart::RxController" <|-- "flutteramap::controller::filter_controller.dart::FilterControl"
+
+class "flutteramap::controller::find_controller.dart::FindControl" {
+  +dynamic findLoading
+  +dynamic findSuccess
+  +dynamic findFailure
+  {static} +FindControl to
+  +void initialState()
+  +void findLoadingState()
+  +void findSuccessState()
+  +void findFailureState()
+  +void reFindingState()
+}
+
+"flutteramap::controller::find_controller.dart::FindControl" o-- "flutteramap::controller::find_controller.dart::FindControl"
+"get::src::rx::rx_interface.dart::RxController" <|-- "flutteramap::controller::find_controller.dart::FindControl"
+
+class "flutteramap::controller::home_controller.dart::HomeControl" {
+  +dynamic openFilterPage
+  +dynamic openSearchPage
+  +GlobalKey<ScaffoldState> scaffoldKey
+  {static} +HomeControl to
+  +void initHomeState()
+  +void openingSearchPage()
+  +void openingFilterpage()
+}
+
+"flutteramap::controller::home_controller.dart::HomeControl" o-- "flutter::src::widgets::framework.dart::GlobalKey<ScaffoldState>"
+"flutteramap::controller::home_controller.dart::HomeControl" o-- "flutteramap::controller::home_controller.dart::HomeControl"
+"get::src::rx::rx_interface.dart::RxController" <|-- "flutteramap::controller::home_controller.dart::HomeControl"
+
+class "flutteramap::controller::map_controller.dart::MapControl" {
+  +FilterControl filter
+  +Completer<GoogleMapController> completer
+  +dynamic myLocation
+  +dynamic position
+  +dynamic zoom
+  +dynamic markers
+  +dynamic markerByLongPress
+  +dynamic onMarkerTap
+  +dynamic atms
+  +dynamic markerIcon
+  +dynamic ontapIcon
+  {static} +MapControl to
+  +void onInit()
+  +void initialState()
+  +Future findAtmFromPosition()
+  +Future updateUiFindAtmWithPosition()
+  +void updateMarker()
+  +void addMarker()
+  +void markerTap()
+  +Future goToTheAtm()
+  +Future zoomOut()
+  +Future goToMyLocation()
+}
+
+"flutteramap::controller::map_controller.dart::MapControl" o-- "flutteramap::controller::filter_controller.dart::FilterControl"
+"flutteramap::controller::map_controller.dart::MapControl" o-- "dart::async::Completer<GoogleMapController>"
+"flutteramap::controller::map_controller.dart::MapControl" o-- "flutteramap::controller::map_controller.dart::MapControl"
+"get::src::rx::rx_interface.dart::RxController" <|-- "flutteramap::controller::map_controller.dart::MapControl"
+
+class "flutteramap::controller::search_controller.dart::SearchControl" {
+  -ScrollController _controller
+  +dynamic isScroll
+  +dynamic searchResult
+  {static} +SearchControl to
+  +ScrollController controller
+  +void onInit()
+  -dynamic _scrollListener()
+  +void updateSearchResult()
+}
+
+"flutteramap::controller::search_controller.dart::SearchControl" o-- "flutter::src::widgets::scroll_controller.dart::ScrollController"
+"flutteramap::controller::search_controller.dart::SearchControl" o-- "flutteramap::controller::search_controller.dart::SearchControl"
+"get::src::rx::rx_interface.dart::RxController" <|-- "flutteramap::controller::search_controller.dart::SearchControl"
+
+class "flutteramap::main.dart::InitialBinding" {
+  +void dependencies()
+}
+
+"get::src::routes::bindings_interface.dart::Bindings" <|-- "flutteramap::main.dart::InitialBinding"
+
+class "flutteramap::models::atm.dart::AtmModel" {
+  +String title
+  +String id
+  +String resultType
+  +Address address
+  +Position position
+  +Access access
+  +int distance
+  +ApiCategory categories
+  +Chain chains
+  +Contact contacts
+  +Map toJson()
+}
+
+"flutteramap::models::atm.dart::AtmModel" o-- "flutteramap::models::atm.dart::Address"
+"flutteramap::models::atm.dart::AtmModel" o-- "flutteramap::models::atm.dart::Position"
+"flutteramap::models::atm.dart::AtmModel" o-- "flutteramap::models::atm.dart::Access"
+"flutteramap::models::atm.dart::AtmModel" o-- "flutteramap::models::atm.dart::ApiCategory"
+"flutteramap::models::atm.dart::AtmModel" o-- "flutteramap::models::atm.dart::Chain"
+"flutteramap::models::atm.dart::AtmModel" o-- "flutteramap::models::atm.dart::Contact"
+
+class "flutteramap::models::atm.dart::Address" {
+  +String label
+  +String countryCode
+  +String countryName
+  +String state
+  +String county
+  +String city
+  +String district
+  +String street
+  +String postalCode
+  +String houseNumber
+  +Map toJson()
+}
+
+class "flutteramap::models::atm.dart::Position" {
+  +double lat
+  +double lng
+  +Map toJson()
+}
+
+class "flutteramap::models::atm.dart::Access" {
+  +double lat
+  +double lng
+  +Map toJson()
+}
+
+class "flutteramap::models::atm.dart::ApiCategory" {
+  +String id
+  +String name
+  +bool primary
+  +Map toJson()
+}
+
+class "flutteramap::models::atm.dart::Chain" {
+  +String id
+  +Map toJson()
+}
+
+class "flutteramap::models::atm.dart::Contact" {
+  +String phone
+  +Map toJson()
+}
+
+class "flutteramap::models::PlaceItem.dart::PlaceItem" {
+  +String name
+  +String address
+  +double lat
+  +double lng
+  {static} +List fromJson()
+}
+
+class "flutteramap::repository::atm_repo.dart::AtmRepository" {
+  +Future findATM()
+  +Future getData()
+}
+
+class "flutteramap::screens::flash_page.dart::FlashPage" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutteramap::screens::flash_page.dart::FlashPage"
+
+class "flutteramap::screens::flitter::bank_selector.dart::BankSelector" {
+  -FilterControl _filterControl
+  +EdgeInsets buttonPadding
+  +dynamic data
+  +dynamic label
+  +Widget build()
+}
+
+"flutteramap::screens::flitter::bank_selector.dart::BankSelector" o-- "flutteramap::controller::filter_controller.dart::FilterControl"
+"flutteramap::screens::flitter::bank_selector.dart::BankSelector" o-- "flutter::src::painting::edge_insets.dart::EdgeInsets"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutteramap::screens::flitter::bank_selector.dart::BankSelector"
+
+class "flutteramap::screens::flitter::filter.dart::Filter" {
+  -MapControl _mapControl
+  -HomeControl _homeControl
+  +Widget build()
+}
+
+"flutteramap::screens::flitter::filter.dart::Filter" o-- "flutteramap::controller::map_controller.dart::MapControl"
+"flutteramap::screens::flitter::filter.dart::Filter" o-- "flutteramap::controller::home_controller.dart::HomeControl"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutteramap::screens::flitter::filter.dart::Filter"
+
+class "flutteramap::screens::flitter::filter_page.dart::FilterPage" {
+  +GlobalKey<ScaffoldState> scaffoldKey
+  -FilterControl _filterControl
+  +dynamic selectedBank
+  +Widget build()
+  +DirectSelectItem getDropDownMenuItem()
+  -dynamic _getDslDecoration()
+}
+
+"flutteramap::screens::flitter::filter_page.dart::FilterPage" o-- "flutter::src::widgets::framework.dart::GlobalKey<ScaffoldState>"
+"flutteramap::screens::flitter::filter_page.dart::FilterPage" o-- "flutteramap::controller::filter_controller.dart::FilterControl"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutteramap::screens::flitter::filter_page.dart::FilterPage"
+
+class "flutteramap::screens::home::category.dart::Category" {
+  -MapControl _mapControl
+  -HomeBarControl _appBarControl
+  -FindControl _findControl
+  +dynamic categories
+  +Widget build()
+}
+
+"flutteramap::screens::home::category.dart::Category" o-- "flutteramap::controller::map_controller.dart::MapControl"
+"flutteramap::screens::home::category.dart::Category" o-- "flutteramap::controller::appbar_controller.dart::HomeBarControl"
+"flutteramap::screens::home::category.dart::Category" o-- "flutteramap::controller::find_controller.dart::FindControl"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutteramap::screens::home::category.dart::Category"
+
+class "flutteramap::screens::home::drawer.dart::MyDrawer" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutteramap::screens::home::drawer.dart::MyDrawer"
+
+class "flutteramap::screens::home::home_bar.dart::HomeBar" {
+  -FindControl _findControl
+  -HomeBarControl _homeBarControl
+  -MapControl _mapControl
+  +GlobalKey<ScaffoldState> scaffoldKey
+  +Widget build()
+}
+
+"flutteramap::screens::home::home_bar.dart::HomeBar" o-- "flutteramap::controller::find_controller.dart::FindControl"
+"flutteramap::screens::home::home_bar.dart::HomeBar" o-- "flutteramap::controller::appbar_controller.dart::HomeBarControl"
+"flutteramap::screens::home::home_bar.dart::HomeBar" o-- "flutteramap::controller::map_controller.dart::MapControl"
+"flutteramap::screens::home::home_bar.dart::HomeBar" o-- "flutter::src::widgets::framework.dart::GlobalKey<ScaffoldState>"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutteramap::screens::home::home_bar.dart::HomeBar"
+
+class "flutteramap::screens::home::home_page.dart::HomePage" {
+  -MapControl _mapControl
+  -HomeControl _homeControl
+  -BottomSheetControl _sheetControl
+  +Widget build()
+}
+
+"flutteramap::screens::home::home_page.dart::HomePage" o-- "flutteramap::controller::map_controller.dart::MapControl"
+"flutteramap::screens::home::home_page.dart::HomePage" o-- "flutteramap::controller::home_controller.dart::HomeControl"
+"flutteramap::screens::home::home_page.dart::HomePage" o-- "flutteramap::controller::bottomsheet_controller.dart::BottomSheetControl"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutteramap::screens::home::home_page.dart::HomePage"
+
+class "flutteramap::screens::home::mylocation_button.dart::MyLocationButton" {
+  +HomeControl homeControl
+  +MapControl mapControl
+  +FocusNode focusNode
+  +Widget build()
+}
+
+"flutteramap::screens::home::mylocation_button.dart::MyLocationButton" o-- "flutteramap::controller::home_controller.dart::HomeControl"
+"flutteramap::screens::home::mylocation_button.dart::MyLocationButton" o-- "flutteramap::controller::map_controller.dart::MapControl"
+"flutteramap::screens::home::mylocation_button.dart::MyLocationButton" o-- "flutter::src::widgets::focus_manager.dart::FocusNode"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutteramap::screens::home::mylocation_button.dart::MyLocationButton"
+
+class "flutteramap::screens::search::search_page.dart::SearchPage" {
+  -GlobalKey<ScaffoldState> _scaffoldKey
+  -SearchControl _searchControl
+  -HomeControl _homeControl
+  +Widget build()
+}
+
+"flutteramap::screens::search::search_page.dart::SearchPage" o-- "flutter::src::widgets::framework.dart::GlobalKey<ScaffoldState>"
+"flutteramap::screens::search::search_page.dart::SearchPage" o-- "flutteramap::controller::search_controller.dart::SearchControl"
+"flutteramap::screens::search::search_page.dart::SearchPage" o-- "flutteramap::controller::home_controller.dart::HomeControl"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutteramap::screens::search::search_page.dart::SearchPage"
+
+class "flutteramap::services::location.dart::LocationService" {
+  +Future getLocation()
+}
+
+class "flutteramap::widgets::app_bar.dart::CustomAppBar" {
+  +IconButton leading
+  +Widget title
+  +IconButton action
+  +Color color
+  +dynamic shadow
+  +Widget build()
+}
+
+"flutteramap::widgets::app_bar.dart::CustomAppBar" o-- "flutter::src::material::icon_button.dart::IconButton"
+"flutteramap::widgets::app_bar.dart::CustomAppBar" o-- "flutter::src::widgets::framework.dart::Widget"
+"flutteramap::widgets::app_bar.dart::CustomAppBar" o-- "dart::ui::Color"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutteramap::widgets::app_bar.dart::CustomAppBar"
+
+class "flutteramap::widgets::custom_bottom.dart::CustomBottom" {
+  +MapControl mapControl
+  +Completer<ScrollController> completer
+  +BottomSheetControl bottomSheetControl
+  +Widget build()
+}
+
+"flutteramap::widgets::custom_bottom.dart::CustomBottom" o-- "flutteramap::controller::map_controller.dart::MapControl"
+"flutteramap::widgets::custom_bottom.dart::CustomBottom" o-- "dart::async::Completer<ScrollController>"
+"flutteramap::widgets::custom_bottom.dart::CustomBottom" o-- "flutteramap::controller::bottomsheet_controller.dart::BottomSheetControl"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutteramap::widgets::custom_bottom.dart::CustomBottom"
+
+class "flutteramap::widgets::float-button.dart::FloatButton" {
+  +dynamic size
+  +Icon icon
+  +Color color
+  +void Function() onPressed
+  +Widget build()
+}
+
+"flutteramap::widgets::float-button.dart::FloatButton" o-- "flutter::src::widgets::icon.dart::Icon"
+"flutteramap::widgets::float-button.dart::FloatButton" o-- "dart::ui::Color"
+"flutteramap::widgets::float-button.dart::FloatButton" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutteramap::widgets::float-button.dart::FloatButton"
+
+class "flutteramap::widgets::list_atm_result.dart::AtmResults" {
+  +ScrollController scrollController
+  +dynamic atms
+  +Widget build()
+}
+
+"flutteramap::widgets::list_atm_result.dart::AtmResults" o-- "flutter::src::widgets::scroll_controller.dart::ScrollController"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutteramap::widgets::list_atm_result.dart::AtmResults"
+
+class "flutteramap::widgets::list_view_custom.dart::CustomList" {
+  +ScrollController controller
+  +List list
+  +Function itemBuilder
+  +Widget build()
+}
+
+"flutteramap::widgets::list_view_custom.dart::CustomList" o-- "flutter::src::widgets::scroll_controller.dart::ScrollController"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutteramap::widgets::list_view_custom.dart::CustomList"
+
+class "flutteramap::widgets::map.dart::MyMap" {
+  +Set<Marker> markers
+  +Completer<GoogleMapController> completer
+  +LatLng center
+  +Function onLongPress
+  +double zoom
+  +Widget build()
+}
+
+"flutteramap::widgets::map.dart::MyMap" o-- "dart::async::Completer<GoogleMapController>"
+"flutteramap::widgets::map.dart::MyMap" o-- "google_maps_flutter_platform_interface::src::types::location.dart::LatLng"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutteramap::widgets::map.dart::MyMap"
+
+
+@enduml
